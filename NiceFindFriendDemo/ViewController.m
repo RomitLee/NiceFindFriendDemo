@@ -15,6 +15,11 @@
 @property (nonatomic,strong) UIView *view4;
 @property (nonatomic,assign) CGPoint view4Center;
 
+@property (nonatomic,assign) float view3x;
+@property (nonatomic,assign) float view3y;
+@property (nonatomic,assign) float view3w;
+@property (nonatomic,assign) float view3h;
+
 
 @end
 
@@ -52,6 +57,11 @@
     UIPanGestureRecognizer *view4Pen=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(test:)];
     [view4 addGestureRecognizer:view4Pen];
     self.view4Center=view4.center;
+    
+    self.view3x=self.view3.frame.origin.x;
+    self.view3y=self.view3.frame.origin.y;
+    self.view3w=self.view3.frame.size.width;
+    self.view3h=self.view3.frame.size.height;
 }
 
 -(void)test:(UIPanGestureRecognizer *)gest
@@ -67,45 +77,27 @@
     
     //CGPoint point=[gest locationInView:gest.view];
     CGPoint point=[gest translationInView:gest.view];
-   // NSLog(@"point1 /nx===%f/n y======%f",point.x,point.y);
-    //NSLog(@"point2 /nx===%f/n y======%f",point2.x,point2.y);
-    
-    
-    gest.view.center=CGPointMake(self.view4Center.x+point.x, self.view4Center.y+point.y);
-    CGPoint center;
-    float view3x = 0.0;
-    float view3y = 0.0;
-    float view3w= 0.0;
-    float view3h = 0.0;
     
     if(gest.state==UIGestureRecognizerStateBegan)
     {
-        view3x=self.view3.frame.origin.x;
-        view3y=self.view3.frame.origin.y;
-        view3w=self.view3.frame.size.width;
-        view3h=self.view3.frame.size.height;
+
         
-        //NSLog(@"Began :point2 /nx===%f/n y======%f",center.x,center.y);
     }
     //鼠标松下来得瞬间
     
    if(gest.state==UIGestureRecognizerStateEnded)
    {
-       [UIView animateWithDuration:0.4 animations:^{
+       [UIView animateWithDuration:0.3 animations:^{
            gest.view.center=self.view4Center;
        }];
        
-       NSLog(@"Began :point2 /nx===%f/n y======%f",center.x,center.y);
+       
    }
     if(gest.state==UIGestureRecognizerStateChanged)
     {
-        //self.view3.frame=CGRectMake(self.view4.frame.origin.x, =self.view4.frame.origin.y,self.view4.frame.siz)
-        if(point.x>20&&point.x<120)
-        {
-            float xx=point.x/10;
-            
-            self.view3.frame=CGRectMake(view3x-xx, view3y-xx, view3w+xx*2, view3h+xx*2);
-        }
+
+        gest.view.center=CGPointMake(self.view4Center.x+point.x, self.view4Center.y+point.y);
+        NSLog(@"李锐x=%f肖佩y%f",point.x,point.y);
     }
     
 }
