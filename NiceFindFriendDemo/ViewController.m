@@ -5,7 +5,7 @@
 //  Created by RomitLee on 15/7/14.
 //  Copyright (c) 2015年 RomitLee. All rights reserved.
 //
-#define viewDiff 10
+#define viewDiff 20
 
 #define view1width 220
 #define view1center 200
@@ -115,7 +115,7 @@
        {
            UIColor *col=self.view4.backgroundColor;
            
-           [UIView animateWithDuration:0.3 animations:^{
+           [UIView animateWithDuration:0.6 animations:^{
                if(point.x>0)
                {
                    self.view4.frame=CGRectMake([UIScreen mainScreen].bounds.size.width, 40, view4width, view4width);
